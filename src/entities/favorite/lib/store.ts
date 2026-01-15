@@ -44,6 +44,9 @@ export const useFavoritesStore = create<FavoritesState>()(
       isMax: (): boolean => {
         return get().favorites.length >= MAX_FAVORITES;
       },
+      getFavorite: (id: string): Favorite | undefined => {
+        return get().favorites.find((f) => f.id === id);
+      },
     }),
     {
       name: "weather-app-favorites",

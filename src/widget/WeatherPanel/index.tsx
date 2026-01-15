@@ -6,7 +6,11 @@ import { Separator } from "@base-ui/react/separator";
 import { MapPin } from "lucide-react";
 import { HourlyForecast } from "./HourlyForecast";
 
-export function WeatherPanel({ id, name, nx, ny }: Location) {
+interface WeatherPanelProps extends Location {
+  disableFavoriteButton?: boolean;
+}
+
+export function WeatherPanel({ id, name, nx, ny, disableFavoriteButton = false }: WeatherPanelProps) {
   const { currentTemp, todayMinTemp, todayMaxTemp, hourlyWeather, isError } = useWeatherDetail({ nx, ny });
 
   return (
@@ -17,7 +21,7 @@ export function WeatherPanel({ id, name, nx, ny }: Location) {
         <CardTitle className="flex items-center text-xl font-bold">
           <MapPin className="mr-2" /> {name}
         </CardTitle>
-        <FavoriteButton location={{ id, name, nx, ny }} color="white" disabled={isError} />
+        <FavoriteButton location={{ id, name, nx, ny }} color="white" disabled={isError || disableFavoriteButton} />
       </CardHeader>
       <CardContent>
         <div className="flex items-center justify-between">

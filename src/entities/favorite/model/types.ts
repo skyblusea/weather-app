@@ -13,4 +13,5 @@ export interface FavoritesState {
   remove: (id: string) => void;
   isFavorite: (id: string) => boolean;
   isMax: () => boolean;
+  getFavorite: (id: string) => Favorite | undefined;
 }
