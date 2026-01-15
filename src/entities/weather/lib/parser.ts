@@ -76,8 +76,6 @@ export function parseHourlyForecast(
     }
   });
 
-  console.log("timeMap", timeMap.values());
-
   return Array.from(timeMap.values()).sort((a, b) =>
     (a.fcstTime || "").localeCompare(b.fcstTime || ""),
   ) as HourlyForecast[];
