@@ -37,10 +37,10 @@ export function FavoriteCard({ favorite, isFavorite, onAdd, onRemove, weather }:
             <p className="text-muted-foreground text-xs">{favorite.location.path.replaceAll("-", " ")}</p>
           )}
           <div className="mt-2 space-y-1">
-            <p className="text-2xl font-bold">{weather.currentTemp !== null ? `${weather.currentTemp}°` : "--°"}</p>
+            <p className="text-2xl font-bold">{weather.currentTemp !== null ? `${weather.currentTemp}°` : "-°"}</p>
             <p className="text-muted-foreground text-sm">
-              최저 {weather.todayMinTemp !== null ? `${weather.todayMinTemp}°` : "--°"} / 최고{" "}
-              {weather.todayMaxTemp !== null ? `${weather.todayMaxTemp}°` : "--°"}
+              최저 {weather.todayMinTemp !== null ? `${weather.todayMinTemp}°` : "-°"} / 최고{" "}
+              {weather.todayMaxTemp !== null ? `${weather.todayMaxTemp}°` : "-°"}
             </p>
           </div>
         </div>
