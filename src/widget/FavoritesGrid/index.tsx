@@ -1,23 +1,23 @@
-import type { Favorite } from "@/entities/favorite/model/types";
+import { useFavoritesStore } from "@/entities/favorite/lib/store";
+import { useWeatherSummary } from "@/entities/weather/model/useWeatherSummary";
 import { FavoriteCard } from "./FavoriteCard";
 
-export function FavoritesGrid({ favorites }: { favorites: Favorite[] }) {
+export function FavoritesGrid() {
+  const { favorites } = useFavoritesStore();
+
+  const weatherSummaries = useWeatherSummary(
+    favorites.map((favorite) => ({ nx: favorite.location.nx, ny: favorite.location.ny })),
+  );
+
   return (
     <div className="grid w-full grid-cols-1 gap-4">
       {favorites.length > 0 ? (
-        favorites.map((favorite) => (
+        favorites.map((favorite, index) => (
           <FavoriteCard
-            key={favorite.location.path}
+            key={favorite.location.id}
             favorite={favorite}
             isFavorite={true}
-            onAdd={() => {}}
-            onRemove={() => {}}
-            weather={{
-              condition: "SUNNY",
-              currentTemp: 20,
-              todayMinTemp: 10,
-              todayMaxTemp: 30,
-            }}
+            weather={weatherSummaries[index]}
           />
         ))
       ) : (
