@@ -3,6 +3,7 @@ import { latLonToGrid } from "@/shared/lib/latLonToGrid";
 import { useEffect, useState } from "react";
 
 const DEFAULT_LOCATION: Location = {
+  id: "current",
   nx: 62,
   ny: 126,
   name: "현재 위치",
@@ -21,11 +22,7 @@ export function useCurrentLocation() {
       (position) => {
         const { latitude, longitude } = position.coords;
         const { x: nx, y: ny } = latLonToGrid(longitude, latitude);
-        setCurrentLocation({
-          nx,
-          ny,
-          name: "현재 위치",
-        });
+        setCurrentLocation({ ...DEFAULT_LOCATION, nx, ny });
       },
       (error) => {
         let errorMessage = "위치 정보를 가져오는데 실패했습니다";
