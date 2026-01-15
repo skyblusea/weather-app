@@ -22,9 +22,9 @@ export function DistrictSearchBar({ onLocationSelect }: SearchBarProps) {
   const handleSelect = (location: KmaLocation | null) => {
     if (location) {
       onLocationSelect({
+        id: location.path,
         nx: location.gridX,
         ny: location.gridY,
-        id: location.code,
         name: location.path.replaceAll("-", " "),
       });
       setInput("");
