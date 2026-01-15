@@ -14,4 +14,6 @@ export interface FavoritesState {
   isFavorite: (id: string) => boolean;
   isMax: () => boolean;
   getFavorite: (id: string) => Favorite | undefined;
+  getNickname: (id: string) => string | undefined;
+  updateNickname: (id: string, nickname: string) => void;
 }

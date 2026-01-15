@@ -47,6 +47,14 @@ export const useFavoritesStore = create<FavoritesState>()(
       getFavorite: (id: string): Favorite | undefined => {
         return get().favorites.find((f) => f.id === id);
       },
+      updateNickname: (id: string, nickname: string) => {
+        set((state) => ({
+          favorites: state.favorites.map((f) => (f.id === id ? { ...f, nickname } : f)),
+        }));
+      },
+      getNickname: (id: string): string | undefined => {
+        return get().favorites.find((f) => f.id === id)?.nickname;
+      },
     }),
     {
       name: "weather-app-favorites",

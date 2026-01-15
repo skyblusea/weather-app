@@ -13,5 +13,12 @@ export function DetailPage() {
     return <div className="mx-auto my-8 flex min-h-screen w-full max-w-lg flex-col gap-4 overflow-y-auto px-4"></div>;
   }
 
-  return <WeatherPanel {...locationData.location} disableFavoriteButton={true} />;
+  return (
+    <WeatherPanel
+      {...locationData.location}
+      name={locationData.nickname ?? locationData.location.name}
+      disableFavoriteButton={true}
+      showEditNameButton={true}
+    />
+  );
 }

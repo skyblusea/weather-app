@@ -1,5 +1,6 @@
 import type { Location } from "@/entities/location/model/types";
 import { useWeatherDetail } from "@/entities/weather/model/useWeatherDetail";
+import EditNameButton from "@/features/edit-name/ui/EditNameButton";
 import { FavoriteButton } from "@/features/toggle-favorite/ui/FavoriteButton";
 import { Card, CardContent, CardHeader, CardTitle } from "@/shared/ui/card";
 import { Separator } from "@base-ui/react/separator";
@@ -8,9 +9,17 @@ import { HourlyForecast } from "./HourlyForecast";
 
 interface WeatherPanelProps extends Location {
   disableFavoriteButton?: boolean;
+  showEditNameButton?: boolean;
 }
 
-export function WeatherPanel({ id, name, nx, ny, disableFavoriteButton = false }: WeatherPanelProps) {
+export function WeatherPanel({
+  id,
+  name,
+  nx,
+  ny,
+  disableFavoriteButton = false,
+  showEditNameButton = false,
+}: WeatherPanelProps) {
   const { currentTemp, todayMinTemp, todayMaxTemp, hourlyWeather, isError } = useWeatherDetail({ nx, ny });
 
   return (
@@ -19,7 +28,7 @@ export function WeatherPanel({ id, name, nx, ny, disableFavoriteButton = false }
     >
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="flex items-center text-xl font-bold">
-          <MapPin className="mr-2" /> {name}
+          <MapPin className="mr-2" /> {name} {showEditNameButton && <EditNameButton id={id} />}
         </CardTitle>
         <FavoriteButton location={{ id, name, nx, ny }} color="white" disabled={isError || disableFavoriteButton} />
       </CardHeader>
