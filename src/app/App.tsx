@@ -1,12 +1,15 @@
+import "@/index.css";
+import { Layout } from "@/widget/Layout";
 import { Providers } from "./providers";
 import { AppRoutes } from "./routes";
-import "@/index.css";
 
 function App() {
   return (
     <Providers>
       <div className="bg-background min-h-screen font-sans antialiased">
-        <AppRoutes />
+        <Layout>
+          <AppRoutes />
+        </Layout>
       </div>
     </Providers>
   );
