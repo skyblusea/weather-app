@@ -1,4 +1,4 @@
-import type { WeatherCondition } from "./types";
+import type { WeatherCondition } from "../model/types";
 
 export function getWeatherCondition(sky: number, pty: number): WeatherCondition {
   // 강수 우선

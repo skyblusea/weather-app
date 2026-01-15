@@ -1,4 +1,4 @@
-import { WEATHER_ICON_SPRITE_MAP } from "../model/spriteMap";
+import { WEATHER_ICON_SPRITE_MAP } from "../model/constants";
 import type { WeatherCondition } from "../model/types";
 
 type WeatherIconProps = {
