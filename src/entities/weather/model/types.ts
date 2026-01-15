@@ -1,10 +1,11 @@
 import type { PTY_CODES, SKY_CODES } from "./constants";
 
 export interface WeatherSummary {
-  condition: WeatherCondition;
-  currentTemp: number;
-  todayMinTemp: number;
-  todayMaxTemp: number;
+  currentTemp: number | null;
+  todayMinTemp: number | null;
+  todayMaxTemp: number | null;
+  isLoading: boolean;
+  isError: boolean;
 }
 
 export type SkyCode = (typeof SKY_CODES)[keyof typeof SKY_CODES];
