@@ -1,3 +1,4 @@
+import { Toaster } from "@/shared/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import { BrowserRouter } from "react-router";
@@ -14,7 +15,10 @@ const queryClient = new QueryClient({
 export const Providers = ({ children }: { children: ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>{children}</BrowserRouter>
+      <BrowserRouter>
+        {children}
+        <Toaster />
+      </BrowserRouter>
     </QueryClientProvider>
   );
 };
