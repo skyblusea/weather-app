@@ -23,7 +23,7 @@ export function WeatherPanel({ id, name, nx, ny }: Location) {
         <div className="flex items-center justify-between">
           <div className="space-y-2">
             <div className="relative">
-              <div className={`text-6xl font-bold ${isError && "opacity-0"}`}>{Math.round(currentTemp ?? 0)}°</div>
+              <div className={`text-6xl font-bold ${isError && "opacity-0"}`}>{currentTemp ?? 0}°</div>
             </div>
             <div className={`text-sm opacity-80 ${isError && "font-bold opacity-100"}`}>
               {isError ? (
