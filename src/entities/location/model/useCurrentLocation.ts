@@ -1,16 +1,24 @@
 import type { Location } from "@/entities/location/model/types";
 import { latLonToGrid } from "@/shared/lib/latLonToGrid";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { locationQueryOptions } from "../api/queries";
 
 const DEFAULT_LOCATION: Location = {
-  id: "current",
+  id: "서울특별시-광진구-광장동",
   nx: 62,
   ny: 126,
-  name: "현재 위치",
+  name: "서울특별시 광진구 광장동",
 };
 
 export function useCurrentLocation() {
   const [currentLocation, setCurrentLocation] = useState<Location>(DEFAULT_LOCATION);
+
+  const { data: kmaLocations } = useQuery(locationQueryOptions.list());
+  const getLocationPath = (nx: number, ny: number) => {
+    const location = kmaLocations?.find((location) => location.nx === nx && location.ny === ny);
+    return location?.path;
+  };
 
   useEffect(() => {
     if (!("geolocation" in navigator)) {
@@ -22,7 +30,14 @@ export function useCurrentLocation() {
       (position) => {
         const { latitude, longitude } = position.coords;
         const { x: nx, y: ny } = latLonToGrid(longitude, latitude);
-        setCurrentLocation({ ...DEFAULT_LOCATION, nx, ny });
+        const locationPath = getLocationPath(nx, ny);
+
+        setCurrentLocation({
+          id: locationPath ?? DEFAULT_LOCATION.id,
+          name: locationPath?.replaceAll("-", " ") ?? DEFAULT_LOCATION.name,
+          nx,
+          ny,
+        });
       },
       (error) => {
         let errorMessage = "위치 정보를 가져오는데 실패했습니다";
